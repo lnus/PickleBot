@@ -42,7 +42,7 @@ if __name__ == '__main__':
     p.post_tweet()
 
     # Sets up a schedule
-    schedule.every(15).minutes.do(p.post_tweet)
+    schedule.every(30).minutes.do(p.post_tweet)
 
     # Runs the schedule for timed posts
     while True:
