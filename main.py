@@ -2,6 +2,8 @@ import tweepy
 import time
 import schedule
 import markovify
+import nltk.data
+from random import shuffle
 
 # Reads from my keys.py file
 # Won't upload that for obvious reasons.
@@ -19,11 +21,16 @@ api = tweepy.API(auth)
 
 class PickleBot(object):
     def __init__(self):
+        self.tokenizer = nltk.data.load("tokenizers/punkt/english.pickle")
         print("### PickleBot 1.0 up and running ###")
     
     def generate_tweet(self):
         with open("rick_transcripts.txt") as f:
             text = f.read()
+            sentences = "+".join(self.tokenizer.tokenize(text))
+            full_split = sentences.split("+")
+            shuffle(full_split)
+            text = " ".join(full_split)
             f.close()
         text_model = markovify.Text(text)
         return(text_model.make_short_sentence(140))
