@@ -3,6 +3,7 @@ import time
 import schedule
 import markovify
 
+# Reads from my keys.py file
 # Won't upload that for obvious reasons.
  
 from keys import *
